@@ -16,7 +16,10 @@
     "url": "https://github.com/ryanbas21/example-sdk-vanilla/issues"
   },
   "homepage": "https://github.com/ryanbas21/example-sdk-vanilla#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@forgerock/javascript-sdk": "^3.0.0",
+    "bootstrap": "^5.0.2"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
   }
