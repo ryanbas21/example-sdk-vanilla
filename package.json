@@ -1,0 +1,23 @@
+{
+  "name": "example-app-vanilla",
+  "version": "1.0.0",
+  "description": "example app",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html --https --cert .cert/cert.pem --key .cert/key.pem"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanbas21/example-sdk-vanilla.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanbas21/example-sdk-vanilla/issues"
+  },
+  "homepage": "https://github.com/ryanbas21/example-sdk-vanilla#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
