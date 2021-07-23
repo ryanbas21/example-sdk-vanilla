@@ -1,4 +1,4 @@
-import { FRAuth, UserManager, TokenManager } from '@forgerock/javascript-sdk';
+import { FRAuth } from '@forgerock/javascript-sdk';
 
 const FATAL = 'FATAL'
 
@@ -9,20 +9,8 @@ function handleFatalError(err) {
 
 // Get the next step using the FRAuth API
 function nextStep(step) {
+  console.log('step: ', step);
   FRAuth.next(step).then(handleStep).catch(handleFatalError);
-}
-
-function showStep(handler) {
-    // document.querySelectorAll('#steps > div').forEach(x => x.classList.remove('active'));
-    const panel = document.getElementById(handler);
-    console.log('handler', handler)
-    console.log('panel', panel)
-    if (!panel) {
-        console.error(`No panel with ID "${handler}"" found`);
-        return false;
-    }
-    document.getElementById(handler).classList.add('active');
-    return true;
 }
 
 function getStage(step) {
@@ -44,7 +32,6 @@ const handlers = {
       const passwordCallback = step.getCallbackOfType('PasswordCallback');
       nameCallback.setName(document.querySelector('input[type=text]').value);
       passwordCallback.setPassword(document.querySelector('input[type=password]').value);
-
       nextStep(step);
     })
   },
@@ -55,42 +42,27 @@ const handlers = {
 }
 
 function handleStep(step) {
+    console.log(step.type)
+    if (!step.type) return;
+
     switch (step.type) {
         case 'LoginSuccess':
-            // If we have a session token, get user information
-            // const sessionToken = step.getSessionToken();
-            const tokens = TokenManager.getTokens({ forceRenew: true }).then(console.log);
-            return UserManager
-                .getCurrentUser()
-		  .then(showUser)
-		  .catch(err => console.error('THE ERROR ', err));
+	    step.type = false;
+	    window.location.replace('https://ryan.example.com:1234/success.html');
+	    return;
+	    
 
         case 'LoginFailure':
-            showStep('Error');
             handlers['Error'](step);
             return;
 
         default:
             const stage = getStage(step) || FATAL;
-	    console.log(stage);
-            if (!showStep(stage)) {
-                showStep(FATAL);
-                handlers[FATAL](step);
-            } else {
-                handlers[stage](step);
-            }
+            return stage === FATAL 
+	      ? handlers[FATAL](step) 
+	      : handlers[stage](step);
     }
 }
 
-function showUser(user) {
-    const userObj = JSON.stringify(user, null, 2);
-    console.log(success);
-    // document.location.href = 'https://ryan.example.com:1234/success'
-    // document.querySelector('.btn').addEventListener('click', () => {
-    //     logout();
-    // });
-    showStep('User');
-}
 
-
-export { showUser, handleStep, showStep, nextStep };
+export { showUser, handleStep, nextStep };

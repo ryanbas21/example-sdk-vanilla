@@ -17,8 +17,8 @@ Example app using sdk for basic use
 - [x] The app renders a basic username-password form with default styling from TBS
 - [x] Upon submission of the form, plain JS catches the form submission event and uses the value off of the event target to submit them with the SDK's FRAuth to AM.
 
-- [ ] Handles a success or failure of login, rendering some kind of basic message to user
-- [ ] Once logged in, display a functional logout button that uses the SessionManager to logout the user
+- [x] Handles a success or failure of login, rendering some kind of basic message to user
+- [x] Once logged in, display a functional logout button that uses the SessionManager to logout the user
 - [ ] Once logged out, display the same login form from above
  
 - [ ] Add an OAuth flow to the basic username-password from above:

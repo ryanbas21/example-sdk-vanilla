@@ -4,7 +4,8 @@
   "description": "example app",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html --https --cert .cert/cert.pem --key .cert/key.pem"
+    "start": "parcel './public/index.html' './public/success.html' --https --cert .cert/cert.pem --key .cert/key.pem --no-cache",
+    "build": "parcel './public/*.html' --https --cert .cert/cert.pem --key .cert/key.pem"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,7 @@
   "homepage": "https://github.com/ryanbas21/example-sdk-vanilla#readme",
   "dependencies": {
     "@forgerock/javascript-sdk": "^3.0.0",
-    "bootstrap": "^5.0.2"
-  },
-  "devDependencies": {
-    "parcel-bundler": "^1.12.5"
+    "bootstrap": "^5.0.2",
+    "parcel": "^2.0.0-beta.3.1"
   }
 }
